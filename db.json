@@ -27,9 +27,13 @@
       "last_name": "Kefford",
       "email": "akefford2@shop-pro.jp",
       "ip_address": "8.43.76.176"
+    },
+    {
+      "id": 4,
+      "first_name": "Paul",
+      "last_name": "Kefford",
+      "email": "paul@shop-pro.jp",
+      "ip_address": "10.43.76.176"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

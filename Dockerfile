@@ -1,11 +1,16 @@
 FROM nginx:alpine
 
-RUN apk add nodejs-current-npm
+RUN apk add nodejs-current-npm nano
 RUN npm install -g json-server
 
 WORKDIR /
 COPY entrypoint.sh .
+COPY app/* app/
 
-#ENTRYPOINT ["/usr/bin/json-server /db.json"]
+WORKDIR /app
+RUN npm install 
+
+#COPY db.json .
+
 ENTRYPOINT ["/entrypoint.sh"]
-#ENTRYPOINT ["/bin/sh"]
+#ENTRYPOINT ["sh"]
