@@ -3,7 +3,6 @@ const ip = require('ip');
 const os = require("os");
 const fs = require('fs');
 const fileUpload = require('express-fileupload');
-var sanitize = require("sanitize-filename");
 
 const ipAddress = ip.address();
 const server = jsonServer.create()
@@ -24,51 +23,27 @@ server.post('/upload', function(req, res) {
   let myFile = req.files.myFile;
 
   // Use the mv() method to place the file somewhere on your server
-  myFile.mv(`/app/upload/${myFile.name}`, function(err) {
+  myFile.mv(`/app/public/${myFile.name}`, function(err) {
     if (err)
       return res.status(500).send(err);
 
-    res.json({"uploaded": myFile.name});
+    res.send('File uploaded!');
   });
 });
 
 server.use('/ping',(req,res,next) => {
-  let r = `Hostname: ${hostname} IP: ${ipAddress}`;
-  console.log(`Got ping, responding with: ${r}`);
-  res.send(r);
+//  console.log(req);
+  res.send(`Hostname: ${hostname} IP: ${ipAddress}`);
+//  next();
 })
 
 server.get('/upload',(req,res,next) => {
-  console.log("Listing upload dir");
-
-  let filenames = fs.readdirSync('/app/upload');
-/*
   let o = "";
-  filenames.forEach(file => {
-    console.log(file)
-    o+= file+"<br>\n";
+  let f = fs.readdirSync('/app/public');
+  f.forEach(file => { 
+    o += file+"<br>\n";
   });
-  res.send(o);
-*/
-  let o = [];
-  filenames.forEach(file => {
-    console.log(file)
-    o.push(file);
-  });
-  res.json(o);
-})
-
-server.delete('/upload',(req,res,next) => {
-  let filename=sanitize(req.query.filename);
-  let filepath=`/app/upload/${filename}`;
-  console.log(`Will delete ${filepath}`);
-  try{
-    fs.unlinkSync(filepath);
-     res.send("ok");
-  } catch (err) {
-    res.send("error");
-  }
-})
+  res.send(o);})
 
 server.use(middlewares)
 server.use(router)

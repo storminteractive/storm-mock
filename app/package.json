@@ -1,7 +1,8 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mock REST server that actually works inside Docker",
+  "repository": "storminteractive/storm-mock",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-server": "^0.16.1"
+    "express-fileupload": "^1.1.7-alpha.3",
+    "ip": "^1.1.5",
+    "json-server": "^0.16.1",
+    "sanitize-filename": "^1.6.3"
   }
 }

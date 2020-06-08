@@ -9,7 +9,7 @@ docker kill $CONTAINERNAME; docker rm $CONTAINERNAME;
 docker run --name $CONTAINERNAME --restart=unless-stopped \
   -v $(pwd)/db.json:/db.json \
   -p 80:3000 \
-  --hostname app1.stormint.com \
+  --hostname mock.app1.stormint.com \
   -dit $IMAGENAME \
   --watch db.json
 
